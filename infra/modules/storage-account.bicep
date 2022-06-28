@@ -27,8 +27,15 @@ resource st 'Microsoft.Storage/storageAccounts@2021-08-01' = {
     networkAcls: {
       bypass: 'AzureServices'
       defaultAction: 'Deny'
+      "virtualNetworkRules": [
+             {
+                "id": "[concat(parameters('virtualNetworks_vnet-website_externalid'), '/subnets/dfault')]",
+                 "action": "Allow",
+                   "state": "Succeeded"
+              }
+        ]
     }
-    publicNetworkAccess: 'Enabled'
+    publicNetworkAccess: 'false'
     supportsHttpsTrafficOnly: true
   }
 }
